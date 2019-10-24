@@ -1,23 +1,52 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var morgan = require('morgan');
-var winston = require('./config/winston');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
+const winston = require('./config/winston');
+const helmet = require('helmet');
+const session = require('express-session');
+const rateLimit = require("express-rate-limit");
 
-var usersRouter = require('./routes/users');
+const usersRouter = require('./routes/users');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(morgan('combined', { stream: winston.stream }));
-app.use(express.json());
+app.use(express.json({limit: '100kb'}));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Start: security settings
+app.use(helmet());
+
+app.set('trust proxy', 1);
+app.use(session({
+  secret: 's3Cur3',
+  name: 'sessionId',
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true, // minimize risk of XSS attacks by restricting the client from reading the cookie
+    secure: true, // only send cookie over https
+    maxAge: 60000*60*24 // set cookie expiry length in ms
+  }
+}));
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
+
+// apply to all requests
+app.use(limiter);
+
+// End: security settings
 
 app.use('/users', usersRouter);
 
