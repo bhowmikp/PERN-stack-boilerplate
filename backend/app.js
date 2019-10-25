@@ -8,13 +8,14 @@ const helmet = require('helmet');
 const session = require('express-session');
 const rateLimit = require("express-rate-limit");
 
+const swaggerSpec = require('./config/swagger');
+const swaggerUi = require('swagger-ui-express');
+
 const usersRouter = require('./routes/users');
 
-const app = express();
+require('dotenv').config();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+const app = express();
 
 app.use(morgan('combined', { stream: winston.stream }));
 app.use(express.json({limit: '100kb'}));
@@ -49,6 +50,17 @@ app.use(limiter);
 // End: security settings
 
 app.use('/users', usersRouter);
+
+
+// Start: swagger
+if (process.env.NODE_ENV !== 'production') {
+  app.get('/swagger.json', function(req, res) {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(swaggerSpec);
+  });
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+}
+  // End: swagger
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
