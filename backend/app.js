@@ -7,16 +7,15 @@ const session = require('express-session');
 const rateLimit = require('express-rate-limit');
 
 const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./config/swagger');
-const winston = require('./config/winston');
+const config = require('./config/index');
 
-const usersRouter = require('./routes/users');
+const usersRouter = require('./users/api');
 
 require('dotenv').config();
 
 const app = express();
 
-app.use(morgan('combined', { stream: winston.stream }));
+app.use(morgan('combined', { stream: config.winston.stream }));
 app.use(express.json({ limit: '100kb' }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -56,9 +55,9 @@ app.use('/users', usersRouter);
 if (process.env.NODE_ENV !== 'production') {
   app.get('/swagger.json', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
-    res.send(swaggerSpec);
+    res.send(config.swaggerSpec);
   });
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(config.swaggerSpec));
 }
 // End: swagger
 
@@ -74,7 +73,7 @@ app.use((err, req, res) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  winston.error(
+  config.winston.error(
     `${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`,
   );
 
