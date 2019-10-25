@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+
+const router = express.Router();
 
 /**
  * @swagger
@@ -17,8 +18,8 @@ var router = express.Router();
  *      '200':
  *        description: message displayed successfully
  */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/', (req, res) => {
+  res.end(JSON.stringify({ a: 1 }));
 });
 
 module.exports = router;
