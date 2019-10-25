@@ -10,7 +10,6 @@
 - VSCode install ESLint and Prettier. eslint --fix [filename] and Format document
 
 Need to do:
-- set linting rules
 - testing
 - validator.js
 - piplines (coverage testing, static code analysis, CI)
