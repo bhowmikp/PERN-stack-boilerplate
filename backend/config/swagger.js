@@ -6,7 +6,7 @@ const swaggerDefinition = {
     version: '1.0.0',
     description: 'API endpoints',
   },
-  host: 'localhost:3000',
+  host: 'localhost:3001',
   basePath: '/api-docs',
   securityDefinitions: {
     bearerAuth: {
