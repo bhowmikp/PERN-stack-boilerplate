@@ -15,6 +15,8 @@ require('dotenv').config();
 
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(morgan('combined', { stream: config.winston.stream }));
 app.use(express.json({ limit: '100kb' }));
 app.use(express.urlencoded({ extended: false }));

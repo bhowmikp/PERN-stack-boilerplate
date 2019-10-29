@@ -2,12 +2,12 @@ const swaggerJSDoc = require('swagger-jsdoc');
 
 const swaggerDefinition = {
   info: {
-    title: 'MySQL Registration Swagger API',
+    title: 'Swagger API',
     version: '1.0.0',
-    description: 'Endpoints to test the user registration routes',
+    description: 'API endpoints',
   },
   host: 'localhost:3000',
-  basePath: '/',
+  basePath: '/api-docs',
   securityDefinitions: {
     bearerAuth: {
       type: 'apiKey',
@@ -20,7 +20,7 @@ const swaggerDefinition = {
 
 const options = {
   swaggerDefinition,
-  apis: ['./routes/*.js'],
+  apis: ['./*/api.js'],
 };
 
 const swaggerSpec = swaggerJSDoc(options);

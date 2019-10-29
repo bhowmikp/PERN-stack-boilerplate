@@ -14,4 +14,3 @@ Need to do:
 - validator.js
 - piplines (coverage testing, static code analysis, CI)
 - ORM
-- swagger guidelines
