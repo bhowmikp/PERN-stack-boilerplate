@@ -1,6 +1,6 @@
 const express = require('express');
 
-const router = express.Router();
+const uesrRouter = express.Router();
 
 /**
  * @swagger
@@ -18,7 +18,7 @@ const router = express.Router();
  *      '200':
  *        description: message displayed successfully
  */
-router.get('/', (req, res) => {
+uesrRouter.get('/', (req, res) => {
   res.status(200).send({
     a: 1,
   });
@@ -42,11 +42,11 @@ router.get('/', (req, res) => {
  *        required:
  *          - username
  */
-router.post('/test', (req, res) => {
+uesrRouter.post('/test', (req, res) => {
   // console.log(req.body.username);
   res.status(200).send({
     status: 'OK',
   });
 });
 
-module.exports = router;
+module.exports = uesrRouter;

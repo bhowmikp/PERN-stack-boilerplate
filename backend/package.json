@@ -9,7 +9,7 @@
     "start": "concurrently \"npm run backend\" \"npm run frontend\""
   },
   "dependencies": {
-    "app-root-path": "^2.2.1",
+    "app-root-path": "^3.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~4.1.1",
     "dotenv": "^8.2.0",

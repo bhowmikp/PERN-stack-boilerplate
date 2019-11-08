@@ -9,7 +9,7 @@ const rateLimit = require('express-rate-limit');
 const swaggerUi = require('swagger-ui-express');
 const config = require('./config/index');
 
-const usersRouter = require('./users/api');
+const router = require('./controllers');
 
 require('dotenv').config();
 
@@ -51,7 +51,7 @@ app.use(limiter);
 
 // End: security settings
 
-app.use('/users', usersRouter);
+app.use('/users', router.userRouter);
 
 // Start: swagger
 if (process.env.NODE_ENV !== 'production') {
