@@ -8,6 +8,8 @@
 - uses helmet, express-session, rate-limiting, cookie-expiry for security
 - [Swagger](https://itnext.io/setting-up-swagger-in-a-node-js-application-d3c4d7aa56d4). Available in /api-docs
 - VSCode install ESLint and Prettier. eslint --fix [filename] and Format document
+- Sequelize: npx sequelize model:generate --name User --attributes name:string,email:string
+- Seed files: npx sequelize seed:generate --name User
 
 Need to do:
 - testing

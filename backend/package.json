@@ -5,6 +5,7 @@
   "scripts": {
     "backend": "nodemon ./bin/www",
     "update": "npm audit fix & ncu",
+    "migrate": "npx sequelize db:migrate",
     "frontend": "yarn --cwd ../frontend start",
     "start": "concurrently \"npm run backend\" \"npm run frontend\""
   },
@@ -19,6 +20,9 @@
     "helmet": "^3.21.2",
     "http-errors": "~1.7.3",
     "morgan": "~1.9.1",
+    "pg": "^7.12.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.2",
     "swagger-jsdoc": "^3.4.0",
     "swagger-ui-express": "^4.1.2",
     "winston": "^3.2.1"
@@ -35,6 +39,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "express-generator": "^4.16.1",
     "nodemon": "^1.19.4",
-    "prettier": "1.18.2"
+    "prettier": "1.18.2",
+    "sequelize-cli": "^5.5.1"
   }
 }
