@@ -15,6 +15,7 @@
     "debug": "~4.1.1",
     "dotenv": "^8.2.0",
     "express": "~4.17.1",
+    "express-http-to-https": "^1.1.4",
     "express-rate-limit": "^5.0.0",
     "express-session": "^1.17.0",
     "helmet": "^3.21.2",

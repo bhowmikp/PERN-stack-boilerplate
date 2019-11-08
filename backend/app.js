@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const session = require('express-session');
 const rateLimit = require('express-rate-limit');
+const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 
 const swaggerUi = require('swagger-ui-express');
 const config = require('./config/index');
@@ -15,6 +16,7 @@ require('dotenv').config();
 
 const app = express();
 
+app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan('combined', { stream: config.winston.stream }));
