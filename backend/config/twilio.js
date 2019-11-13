@@ -4,7 +4,7 @@ const client = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKE
 
 /**
  * Sends text to cell phone
- * 
+ *
  * @param {string} phoneNumber: country code + phone number
  * @param {string} body: content of text message
  */
@@ -16,4 +16,4 @@ const sendText = (phoneNumber, body) => {
   }).then();
 };
 
-export default sendText;
+module.exports = sendText;
