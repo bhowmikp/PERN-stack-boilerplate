@@ -1,6 +1,7 @@
 const express = require('express');
 
-const uesrRouter = express.Router();
+const userRouter = express.Router();
+const config = require('../config/index');
 
 /**
  * @swagger
@@ -18,7 +19,7 @@ const uesrRouter = express.Router();
  *      '200':
  *        description: message displayed successfully
  */
-uesrRouter.get('/', (req, res) => {
+userRouter.get('/', (req, res) => {
   res.status(200).send({
     a: 1,
   });
@@ -42,11 +43,18 @@ uesrRouter.get('/', (req, res) => {
  *        required:
  *          - username
  */
-uesrRouter.post('/test', (req, res) => {
+userRouter.post('/test', (req, res) => {
   // console.log(req.body.username);
   res.status(200).send({
     status: 'OK',
   });
 });
 
-module.exports = uesrRouter;
+userRouter.get('/messages', config.authenticationRequired, (req, res) => {
+  res.json([{
+    message: 'Hello, word!',
+    jwt: req.jwt
+  }]);
+});
+
+module.exports = userRouter;

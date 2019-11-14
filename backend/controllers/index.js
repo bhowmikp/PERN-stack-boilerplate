@@ -1,5 +1,5 @@
-const uesrRouter = require('./user');
+const userRouter = require('./user');
 
 module.exports = {
-  userRouter: uesrRouter,
+  userRouter: userRouter,
 };

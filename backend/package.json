@@ -10,6 +10,7 @@
     "start": "concurrently \"npm run backend\" \"npm run frontend\""
   },
   "dependencies": {
+    "@okta/jwt-verifier": "^1.0.0",
     "@sendgrid/mail": "^6.4.0",
     "app-root-path": "^3.0.0",
     "cookie-parser": "~1.4.4",
