@@ -12,11 +12,12 @@ const config = require('./config/index');
 
 const router = require('./controllers');
 
+const cors = require('cors');
+
 require('dotenv').config();
 
 const app = express();
 
-app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan('combined', { stream: config.winston.stream }));
@@ -26,6 +27,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Start: security settings
+app.use(cors(config.corsOptions));
+
+app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301));
+
 app.use(helmet());
 
 app.set('trust proxy', 1);
