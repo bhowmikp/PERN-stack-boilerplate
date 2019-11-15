@@ -13,7 +13,7 @@ class MessageList extends Component {
 
   async componentDidMount() {
     try {
-      const response = await fetch('http://localhost:{serverPort}/api/messages', {
+      const response = await fetch('http://localhost:3001/users/messages', {
         headers: {
           Authorization: 'Bearer ' + await this.props.auth.getAccessToken()
         }
@@ -27,9 +27,10 @@ class MessageList extends Component {
 
   render() {
     if (!this.state.messages) return <div>Loading..</div>;
-    const items = this.state.messages.map(message =>
-      <li key={message}>{message}</li>
+    return (
+      <div>
+        <p>{this.state.messages}</p>
+      </div>
     );
-    return <ul>{items}</ul>;
   }
 });

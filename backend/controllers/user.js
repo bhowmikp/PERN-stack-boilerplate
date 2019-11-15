@@ -51,10 +51,10 @@ userRouter.post('/test', (req, res) => {
 });
 
 userRouter.get('/messages', config.authenticationRequired, (req, res) => {
-  res.json([{
-    message: 'Hello, word!',
+  res.json({
+    messages: 'Hello, word!',
     jwt: req.jwt
-  }]);
+  });
 });
 
 module.exports = userRouter;
