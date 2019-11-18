@@ -52,7 +52,7 @@ userRouter.post('/test', (req, res) => {
 
 userRouter.get('/messages', config.authenticationRequired, (req, res) => {
   res.json({
-    messages: 'Hello, word!',
+    messages: 'Hello ' + req.jwt.claims.sub,
     jwt: req.jwt
   });
 });
